@@ -8,7 +8,7 @@ class MyCommand(cmd.Cmd):
     """
     Starting the interpreter
     """
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_EOF(self, line):
         """Exit with Ctr-D"""
