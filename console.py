@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """
-Starting the interpreter
+Building a command interpreter.
 """
 import cmd
 
-class MyCommand(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """
     Starting the interpreter
     """
@@ -27,4 +27,4 @@ def parse(line):
 
 
 if __name__ == "__main__":
-    MyCommand().cmdloop()
+    HBNBCommand().cmdloop()
