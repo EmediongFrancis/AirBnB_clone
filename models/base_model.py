@@ -29,6 +29,10 @@ class BaseModel:
                     self.updated_at = datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     setattr(self, key, val)
+
+                # not sure if this is the best way to do this, or
+                # the `setattr` function automatically updates the id
+                # based on initial instancing.
                 if self.id == None:
                     self.id = str(uuid.uuid4())
 
