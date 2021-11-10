@@ -13,13 +13,28 @@ class BaseModel:
     """
         Definition of Basemodel class.
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
             Initializes an instance of BaseModel.
         """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+
+        if len(kwargs) > 0:
+            for key, val in kwargs.items():
+                if key == "created_at":
+                    self.created_at = datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "updated_at":
+                    self.updated_at = datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f")
+                else:
+                    setattr(self, key, val)
+
+                # not sure if this is the best way to do this, or
+                # the `setattr` function automatically updates the id
+                # based on initial instancing.
+                if self.id == None:
+                    self.id = str(uuid.uuid4())
 
        
     def __str__(self):
