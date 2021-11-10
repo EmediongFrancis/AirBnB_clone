@@ -8,7 +8,6 @@ from datetime import datetime
 import uuid
 
 
-
 class BaseModel:
     """
         Definition of Basemodel class.
@@ -34,13 +33,13 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
-       
     def __str__(self):
         """
             Prints a string representation of the
             class name, id, and dictionary.
         """
-        return("[{}] ({}) {}".format(self.__class__.__name__,self.id, self.__dict__))
+        return("[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__))
 
     def save(self):
         """
@@ -51,7 +50,7 @@ class BaseModel:
 
     def to_dict(self):
         """
-            Returns a dictionary containing all keys/values 
+            Returns a dictionary containing all keys/values
             of __dict__ of the instance.
         """
         myDict = dict(self.__dict__)
