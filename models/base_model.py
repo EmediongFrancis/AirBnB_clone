@@ -32,6 +32,7 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
+            storage.new(self)
           # (not yet) self.updated_at = datetime.now()
 
     def __str__(self):
@@ -49,7 +50,7 @@ class BaseModel:
         """
         self.updated_at = datetime.now()
         storage.save()
-        
+
 
     def to_dict(self):
         """
