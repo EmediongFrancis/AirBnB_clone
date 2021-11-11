@@ -20,6 +20,18 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
+    def do_create(self, line):
+        """
+           Creates a new instance of BaseModel, saves it
+           to disk, and prints the id.
+        """
+        if line:
+            print("** class doesn't exist **")
+        else:
+            print("** class name missing **")
+        return False
+    
+
 
 def parse(line):
     """Helper method to parse user-typed input."""
