@@ -6,6 +6,7 @@ Building a command interpreter.
 from models.base_model import BaseModel
 from models import storage
 import cmd
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -14,6 +15,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     intro = "Welcome to the HBNB console for Collins & Francis!\n"
     intro += "Enter 'help' to see a list of commands.\n"
+    classes = {"BaseModel", "User"}
     
 
     def do_quit(self, line):
@@ -48,39 +50,44 @@ class HBNBCommand(cmd.Cmd):
             Prints the string representation of an instance
             based on the class name and id.
         """
-        if not line:
+        if len(line) == 0:
             print("** class name missing **")
-        else:
-            try:
-                args = line.split()
-                if len(args) == 1:
-                    print("** instance id missing **")
-                if args[1] not in storage.all().keys():
+            return
+        args = parse(line)
+        if args[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        try:
+            if args[1]:
+                name = "{}.{}".format(args[0], args[1])
+                if name not in storage.all().keys():
                     print("** no instance found **")
                 else:
-                    print(eval(args[0] + "." + args[1])())
-            except:
-                print("** class doesn't exist **")
+                    print(storage.all()[name])
+        except IndexError:
+            print("** instance id missing **")
 
     def do_destroy(self, line):
         """
             Deletes an instance based on the class name and id.
         """
-        if not line:
+        if len(line) == 0:
             print("** class name missing **")
-        else:
-            try:
-                args = line.split()
-                if len(args) == 1:
-                    print("** instance id missing **")
+            return
+        args = parse(line)
+        if args[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        try:
+            if args[1]:
+                name = "{}.{}".format(args[0], args[1])
+                if name not in storage.all().keys():
+                    print("** no instance found **")
                 else:
-                    if args[1] not in storage.all().keys():
-                        print("** no instance found **")
-                    else:
-                        eval(args[0] + "." + args[1]).delete()
-                        storage.save()
-            except:
-                print("** class doesn't exist **")
+                    del storage.all()[name]
+                    storage.save()
+        except IndexError:
+            print("** instance id missing **")
 
     def do_all(self, line):
         """
@@ -121,9 +128,9 @@ class HBNBCommand(cmd.Cmd):
             except:
                 print("** class doesn't exist **")
 
-    def parse(line):
-        """Helper method to parse user-typed input."""
-        return tuple(line.split())
+def parse(line):
+    """Helper method to parse user-typed input."""
+    return tuple(line.split())
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
