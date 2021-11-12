@@ -3,9 +3,10 @@
 Building a command interpreter.
 """
 
-import cmd
-from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models import storage
+import cmd
+
 class HBNBCommand(cmd.Cmd):
     """
     Command interpreter for the HBNB console.
@@ -78,7 +79,6 @@ class HBNBCommand(cmd.Cmd):
                 if len(args) == 1:
                     print("** instance id missing **")
                 else:
-                    storage = FileStorage()
                     if args[1] not in storage.all().keys():
                         print("** no instance found **")
                     else:
@@ -92,7 +92,6 @@ class HBNBCommand(cmd.Cmd):
             Prints all string representation of all instances
             based or not on the class name.
         """
-        storage = FileStorage()
         if not line:
             print([str(i) for i in storage.all().values()])
         else:
