@@ -27,11 +27,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing on empty input line."""
         pass
-    def do_help(self, line):
-        """
-           List of commands.
-        """
-        print("\n".join(self.get_help_text().split("\n")[1:]))
 
     def do_create(self, line):
         """

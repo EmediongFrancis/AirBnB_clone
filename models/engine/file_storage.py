@@ -1,7 +1,8 @@
 #!/usr/bin/python3
+
 '''File Storage'''
+
 import json
-from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -36,10 +37,12 @@ class FileStorage:
         """convert existing json  dicts to instances"""
         try:
             with open(self.__file_path, 'r', encoding="utf-8") as f:
+                from models.base_model import BaseModel
+
                 new_obj = json.load(f)
             for key, val in new_obj.items():
                 class_name = val['__class__']
-                obj = eval(class_name)(**val) 
+                obj = eval(class_name + "(**val)")
                 self.__objects[key] = obj
         except FileNotFoundError:
             pass
