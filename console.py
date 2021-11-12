@@ -6,7 +6,6 @@ Building a command interpreter.
 import cmd
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-from models.__init__ import storage
 class HBNBCommand(cmd.Cmd):
     """
     Command interpreter for the HBNB console.
