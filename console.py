@@ -13,8 +13,15 @@ class HBNBCommand(cmd.Cmd):
     Command interpreter for the HBNB console.
     """
     prompt = "(hbnb) "
-    intro = "Welcome to the HBNB console for Collins & Francis!\n"
-    intro += "Enter 'help' to see a list of commands.\n"
+    intro = '''
+    |+------------------------------------------------------+|
+    |                                                        |
+    | Welcome to Collins & Francis' HBNB Console!            |
+    | Enter 'help' to see a list of commands.                |
+    |                                                        |
+    |+------------------------------------------------------+|
+   '''
+
     classes = {"BaseModel", "User"}
     
 
