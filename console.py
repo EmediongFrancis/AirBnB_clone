@@ -2,17 +2,17 @@
 """
 Building a command interpreter.
 """
-
-from models.base_model import BaseModel
-from models import storage
-import cmd
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 import shlex
+import cmd
+import models
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.state import State
+from models.review import Review
+from models.amenity import Amenity
 
 
 class HBNBCommand(cmd.Cmd):
@@ -31,7 +31,8 @@ class HBNBCommand(cmd.Cmd):
 #     |                                                        |
 #    '''
 
-    classes = {"BaseModel", "User", "State", "City", "Amenity", "Place"}
+    classes = {"BaseModel": BaseModel, "User": User, "State": State,
+    "City": City, "Amenity": Amenity, "Place": Place, "Review": Review}
 
     def do_quit(self, line):
         """Quit command to exit the program."""
@@ -54,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         if not line:
             print("** class name missing **")
         else:
-            if line in HBNBCommand.classes:
+            if line in HBNBCommand.classes.keys():
                 new_instance = eval(line)()
                 new_instance.save()
                 print(new_instance.id)
@@ -70,14 +71,14 @@ class HBNBCommand(cmd.Cmd):
         clargs = line.split()
         if len(clargs) == 0:
             print("** class name missing **")
-        elif clargs[0] not in HBNBCommand.classes:
+        elif clargs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         elif len(clargs) == 1:
             print("** instance id missing **")
         else:
             key_id = "{}.{}".format(clargs[0], clargs[1])
             try:
-                print(storage.all()[key_id])
+                print(models.models.storage.all()[key_id])
             except KeyError:
                 print("** no instance found **")
 
@@ -89,15 +90,15 @@ class HBNBCommand(cmd.Cmd):
         clargs = line.split()
         if len(clargs) == 0:
             print("** class name missing **")
-        elif clargs[0] not in HBNBCommand.classes:
+        elif clargs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         elif len(clargs) == 1:
             print("** instance id missing **")
         else:
             key_id = "{}.{}".format(clargs[0], clargs[1])
             try:
-                del storage.all()[key_id]
-                storage.save()
+                del models.storage.all()[key_id]
+                models.storage.save()
             except KeyError:
                 print("** no instance found **")
 
@@ -110,19 +111,19 @@ class HBNBCommand(cmd.Cmd):
         clargs = line.split()
         new_list = []
         if len(clargs) == 1:
-            if clargs[0] not in HBNBCommand.classes:
+            if clargs[0] not in HBNBCommand.classes.keys():
                 print("** class doesn't exist **")
             else:
-                for key in storage.all().keys():
+                for key in models.storage.all().keys():
                     name = key.split(".")
                     if name[0] == clargs[0]:
-                        new_list.append(storage.all()[key])
+                        new_list.append(models.storage.all()[key])
                     else:
                         continue
                 print(new_list)
         else:
-            for key, value in storage.all().items():
-                new_list.append(str(storage.all()[key]))
+            for key, value in models.storage.all().items():
+                new_list.append(str(models.storage.all()[key]))
             print(new_list)
 
     def do_update(self, line):
@@ -132,11 +133,11 @@ class HBNBCommand(cmd.Cmd):
             Usage: update <class name> <id> <attribute name> "<attribute value>"
         """
         clargs = shlex.split(line)
-        storage.reload()
-        nova_dict = storage.all()
+        models.storage.reload()
+        nova_dict = models.storage.all()
         if len(clargs) == 0:
             print("** class name missing **")
-        elif clargs[0] not in HBNBCommand.classes:
+        elif clargs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         elif len(clargs) == 1:
             print("** instance id missing **")
@@ -151,10 +152,10 @@ class HBNBCommand(cmd.Cmd):
             if hasattr(nova_dict[key_id], clargs[2]):
                 binder = type(getattr(nova_dict[key_id], clargs[2]))
                 setattr(nova_dict[key_id], clargs[2], binder(clargs[3]))
-                storage.save()
+                models.storage.save()
             else:
                 setattr(nova_dict[key_id], clargs[2], clargs[3])
-                storage.save()   
+                models.storage.save()   
 
     def do_help(self, line):
         """
