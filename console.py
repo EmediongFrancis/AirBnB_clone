@@ -19,16 +19,16 @@ class HBNBCommand(cmd.Cmd):
     Command interpreter for the HBNB console.
     """
     prompt = "(hbnb)"
-    intro = '''
-    |+------------------------------------------------------+|
-    |                                                        |
-    | Welcome to Collins & Francis' HBNB Console!            |
-    | Enter 'help' to see a list of commands.                |
-    |                                                        |
-    |+------------------------------------------------------+|
-    |                                                        |
-    |                                                        |
-   '''
+#     intro = '''
+#     |+------------------------------------------------------+|
+#     |                                                        |
+#     | Welcome to Collins & Francis' HBNB Console!            |
+#     | Enter 'help' to see a list of commands.                |
+#     |                                                        |
+#     |+------------------------------------------------------+|
+#     |                                                        |
+#     |                                                        |
+#    '''
 
     classes = {"BaseModel", "User", "State", "City", "Amenity", "Place"}
 
