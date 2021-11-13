@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     |                                                        |
    '''
 
-    classes = {"BaseModel", "User"}
+    classes = {"BaseModel", "User", "State", "City", "Amenity", "Place",}
     
 
     def do_quit(self, line):
