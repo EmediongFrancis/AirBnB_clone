@@ -4,14 +4,14 @@
 
 import json
 import models
-from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
-from models.place import Place
 from models.review import Review
 import os.path as path
+from models.base_model import BaseModel
 
 class FileStorage:
     """serializing and deserializing instances
@@ -33,25 +33,15 @@ class FileStorage:
     def save(self):
         """save directories to json"""
         my_dict = {}
-
-        for key, val in self.__objects.items():
-            """checks that val is of type dict"""
-            my_dict[key] = val.to_dict()
-        with open(self.__file_path, 'w', encoding="utf-8") as f:
+        with open(self.__file_path, mode="w", encoding='UTF-8') as f:
+            for key, value in self.__objects.items():
+                my_dict[key] = value.to_dict()
             json.dump(my_dict, f)
 
     def reload(self):
         """convert existing json  dicts to instances"""
         try:
             with open(self.__file_path, 'r', encoding="utf-8") as f:
-                from models.base_model import BaseModel
-                from models.user import User
-                from models.state import State
-                from models.city import City
-                from models.amenity import Amenity
-                from models.place import Place
-                from models.review import Review
-
                 new_obj = json.load(f)
             for key, val in new_obj.items():
                 class_name = val['__class__']
