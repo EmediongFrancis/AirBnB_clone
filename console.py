@@ -126,36 +126,36 @@ class HBNBCommand(cmd.Cmd):
                 new_list.append(str(models.storage.all()[key]))
             print(new_list)
 
-    def do_update(self, line):
-        """
-            Updates an instance based on the class name and id
-            by adding or updating attribute.
-            Usage: update <class name> <id> <attribute name> "<attribute value>"
-        """
-        clargs = shlex.split(line)
-        models.storage.reload()
-        nova_dict = models.storage.all()
-        if len(clargs) == 0:
-            print("** class name missing **")
-        elif clargs[0] not in HBNBCommand.classes.keys():
-            print("** class doesn't exist **")
-        elif len(clargs) == 1:
-            print("** instance id missing **")
-        elif clargs[0] + "." + clargs[1] not in nova_dict.keys():
-            print("** no instance found **")
-        elif len(clargs) == 2:
-            print("** attribute name missing **")
-        elif len(clargs) == 3:
-            print("** value missing **")
-        else:
-            key_id = "{}.{}".format(clargs[0], clargs[1])
-            if hasattr(nova_dict[key_id], clargs[2]):
-                binder = type(getattr(nova_dict[key_id], clargs[2]))
-                setattr(nova_dict[key_id], clargs[2], binder(clargs[3]))
-                models.storage.save()
-            else:
-                setattr(nova_dict[key_id], clargs[2], clargs[3])
-                models.storage.save()   
+    # def do_update(self, line):
+    #     """
+    #         Updates an instance based on the class name and id
+    #         by adding or updating attribute.
+    #         Usage: update <class name> <id> <attribute name> "<attribute value>"
+    #     """
+    #     clargs = shlex.split(line)
+    #     models.storage.reload()
+    #     nova_dict = models.storage.all()
+    #     if len(clargs) == 0:
+    #         print("** class name missing **")
+    #     elif clargs[0] not in HBNBCommand.classes.keys():
+    #         print("** class doesn't exist **")
+    #     elif len(clargs) == 1:
+    #         print("** instance id missing **")
+    #     elif clargs[0] + "." + clargs[1] not in nova_dict.keys():
+    #         print("** no instance found **")
+    #     elif len(clargs) == 2:
+    #         print("** attribute name missing **")
+    #     elif len(clargs) == 3:
+    #         print("** value missing **")
+    #     else:
+    #         key_id = "{}.{}".format(clargs[0], clargs[1])
+    #         if hasattr(nova_dict[key_id], clargs[2]):
+    #             binder = type(getattr(nova_dict[key_id], clargs[2]))
+    #             setattr(nova_dict[key_id], clargs[2], binder(clargs[3]))
+    #             models.storage.save()
+    #         else:
+    #             setattr(nova_dict[key_id], clargs[2], clargs[3])
+    #             models.storage.save()   
 
     def do_help(self, line):
         """
