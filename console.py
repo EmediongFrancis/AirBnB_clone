@@ -20,6 +20,8 @@ class HBNBCommand(cmd.Cmd):
     | Enter 'help' to see a list of commands.                |
     |                                                        |
     |+------------------------------------------------------+|
+    |                                                        |
+    |                                                        |
    '''
 
     classes = {"BaseModel", "User"}
