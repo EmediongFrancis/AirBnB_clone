@@ -157,9 +157,9 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()   
 
 
-def parse(line):
-    """Helper method to parse user-typed input."""
-    return tuple(line.split())
+# def parse(line):
+#    """Helper method to parse user-typed input."""
+#   return tuple(line.split())
 
 
 if __name__ == "__main__":
