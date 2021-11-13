@@ -109,29 +109,29 @@ class HBNBCommand(cmd.Cmd):
             except KeyError:
                 print("** no instance found **")
 
-    # def do_all(self, line):
-    #     """
-    #         Prints string representations of all instances
-    #         based or not based on the class name.
-    #         Usage: all <class name>
-    #     """
-    #     clargs = line.split()
-    #     new_list = []
-    #     if len(clargs) == 1:
-    #         if clargs[0] not in HBNBCommand.classes.keys():
-    #             print("** class doesn't exist **")
-    #         else:
-    #             for key in models.storage.all().keys():
-    #                 name = key.split(".")
-    #                 if name[0] == clargs[0]:
-    #                     new_list.append(models.storage.all()[key])
-    #                 else:
-    #                     continue
-    #             print(new_list)
-    #     else:
-    #         for key, value in models.storage.all().items():
-    #             new_list.append(str(models.storage.all()[key]))
-    #         print(new_list)
+    def do_all(self, line):
+        """
+            Prints string representations of all instances
+            based or not based on the class name.
+            Usage: all <class name>
+        """
+        clargs = line.split()
+        new_list = []
+        if len(clargs) == 1:
+            if clargs[0] not in HBNBCommand.classes.keys():
+                print("** class doesn't exist **")
+            else:
+                for key in models.storage.all().keys():
+                    name = key.split(".")
+                    if name[0] == clargs[0]:
+                        new_list.append(models.storage.all()[key])
+                    else:
+                        continue
+                print(new_list)
+        else:
+            for key, value in models.storage.all().items():
+                new_list.append(str(models.storage.all()[key]))
+            print(new_list)
 
     def do_update(self, line):
         """
