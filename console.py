@@ -69,25 +69,25 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
-    # def do_show(self, line):
-    #     """
-    #         Prints the string representation of an instance
-    #         based on the class name and id.
-    #         Usage: show <class name> <id>
-    #     """
-    #     clargs = line.split()
-    #     if len(clargs) == 0:
-    #         print("** class name missing **")
-    #     elif clargs[0] not in HBNBCommand.classes.keys():
-    #         print("** class doesn't exist **")
-    #     elif len(clargs) == 1:
-    #         print("** instance id missing **")
-    #     else:
-    #         key_id = "{}.{}".format(clargs[0], clargs[1])
-    #         try:
-    #             print(models.models.storage.all()[key_id])
-    #         except KeyError:
-    #             print("** no instance found **")
+    def do_show(self, line):
+        """
+            Prints the string representation of an instance
+            based on the class name and id.
+            Usage: show <class name> <id>
+        """
+        clargs = line.split()
+        if len(clargs) == 0:
+            print("** class name missing **")
+        elif clargs[0] not in HBNBCommand.classes.keys():
+            print("** class doesn't exist **")
+        elif len(clargs) == 1:
+            print("** instance id missing **")
+        else:
+            key_id = "{}.{}".format(clargs[0], clargs[1])
+            try:
+                print(models.models.storage.all()[key_id])
+            except KeyError:
+                print("** no instance found **")
 
     def do_destroy(self, line):
         """
