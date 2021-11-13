@@ -46,6 +46,13 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing on empty input line."""
         pass
 
+    def do_help(self, line):
+        """
+            Get help on commands.
+            Usage: help <command>
+        """
+        cmd.Cmd.do_help(self, line)
+
     def do_create(self, line):
         """
             Creates a new instance of BaseModel, saves it
@@ -157,12 +164,6 @@ class HBNBCommand(cmd.Cmd):
                 setattr(nova_dict[key_id], clargs[2], clargs[3])
                 models.storage.save()   
 
-    # def do_help(self, line):
-    #     """
-    #         Get help on commands.
-    #         Usage: help <command>
-    #     """
-    #     cmd.Cmd.do_help(self, line)
         
 
 # def parse(line):
