@@ -43,7 +43,6 @@ class FileStorage:
                 from models.amenity import Amenity
                 from models.place import Place
                 from models.review import Review
-                
 
                 new_obj = json.load(f)
             for key, val in new_obj.items():
