@@ -83,24 +83,22 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, line):
         """
             Deletes an instance based on the class name and id.
+            Usage: destroy <class name> <id>
         """
-        if len(line) == 0:
+        clargs = line.split()
+        if len(clargs) == 0:
             print("** class name missing **")
-            return
-        args = parse(line)
-        if args[0] not in HBNBCommand.classes:
+        elif clargs[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
-            return
-        try:
-            if args[1]:
-                name = "{}.{}".format(args[0], args[1])
-                if name not in storage.all().keys():
-                    print("** no instance found **")
-                else:
-                    del storage.all()[name]
-                    storage.save()
-        except IndexError:
+        elif len(clargs) == 1:
             print("** instance id missing **")
+        else:
+            key_id = "{}.{}".format(clargs[0], clargs[1])
+            try:
+                del storage.all()[key_id]
+                storage.save()
+            except KeyError:
+                print("** no instance found **")
 
     def do_all(self, line):
         """
