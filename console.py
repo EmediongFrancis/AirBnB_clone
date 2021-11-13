@@ -42,16 +42,16 @@ class HBNBCommand(cmd.Cmd):
         """Exit with Ctrl-D."""
         return True
 
-    def emptyline(self):
-        """Do nothing on empty input line."""
-        pass
-
     def do_help(self, line):
         """
             Get help on commands.
             Usage: help <command>
         """
         cmd.Cmd.do_help(self, line)
+
+    def emptyline(self):
+        """Do nothing on empty input line."""
+        pass
 
     def do_create(self, line):
         """
