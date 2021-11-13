@@ -12,6 +12,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -128,26 +129,32 @@ class HBNBCommand(cmd.Cmd):
         """
             Updates an instance based on the class name and id
             by adding or updating attribute.
+            Usage: update <class name> <id> <attribute name> "<attribute value>"
         """
-        if not line:
+        clargs = shlex.split(line)
+        storage.reload()
+        nova_dict = storage.all()
+        if len(clargs) == 0:
             print("** class name missing **")
+        elif clargs[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+        elif len(clargs) == 1:
+            print("** instance id missing **")
+        elif clargs[0] + "." + clargs[1] not in nova_dict.keys():
+            print("** no instance found **")
+        elif len(clargs) == 2:
+            print("** attribute name missing **")
+        elif len(clargs) == 3:
+            print("** value missing **")
         else:
-            try:
-                args = line.split()
-                if len(args) == 1:
-                    print("** instance id missing **")
-                elif len(args) == 2:
-                    print("** attribute name missing **")
-                elif len(args) == 3:
-                    print("** value missing **")
-                else:
-                    if args[1] not in storage.all().keys():
-                        print("** no instance found **")
-                    else:
-                        eval(args[0] + "." + args[1]).update(args[2], args[3])
-                        storage.save()
-            except:
-                print("** class doesn't exist **")
+            key_id = "{}.{}".format(clargs[0], clargs[1])
+            if hasattr(nova_dict[key_id], clargs[2]):
+                binder = type(getattr(nova_dict[key_id], clargs[2]))
+                setattr(nova_dict[key_id], clargs[2], binder(clargs[3]))
+                storage.save()
+            else:
+                setattr(nova_dict[key_id], clargs[2], clargs[3])
+                storage.save()   
 
 
 def parse(line):
