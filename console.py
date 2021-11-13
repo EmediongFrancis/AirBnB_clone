@@ -40,8 +40,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """Exit with Ctrl-D."""
-        print("")
         return True
+        print("")
 
     def do_help(self, line):
         """
