@@ -35,7 +35,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         """Quit command to exit the program."""
-        return True
+        raise SystemExit
 
     def do_EOF(self, line):
         """Exit with Ctrl-D."""
@@ -155,6 +155,13 @@ class HBNBCommand(cmd.Cmd):
             else:
                 setattr(nova_dict[key_id], clargs[2], clargs[3])
                 storage.save()   
+
+    def do_help(self, line):
+        """
+            Get help on commands.
+            Usage: help <command>
+        """
+        cmd.Cmd.do_help(self, line)
 
 
 # def parse(line):
