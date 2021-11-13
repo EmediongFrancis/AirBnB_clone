@@ -14,7 +14,6 @@ from models.place import Place
 from models.review import Review
 
 
-
 class HBNBCommand(cmd.Cmd):
     """
     Command interpreter for the HBNB console.
@@ -31,12 +30,7 @@ class HBNBCommand(cmd.Cmd):
     |                                                        |
    '''
 
-<<<<<<< HEAD
-    classes = {"BaseModel", "User"}
-=======
-    classes = {"BaseModel", "User", "State", "City", "Amenity", "Place",}
-    
->>>>>>> 821ef407ffbcbf8e753df995a10538aa876ff28f
+    classes = {"BaseModel", "User", "State", "City", "Amenity", "Place"}
 
     def do_quit(self, line):
         """Quit command to exit the program."""
