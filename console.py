@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             if line in HBNBCommand.classes:
-                new_instance = HBNBCommand.classes[line]()
+                new_instance = eval(line)()
                 new_instance.save()
                 print(new_instance.id)
             else:
@@ -162,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
             Usage: help <command>
         """
         cmd.Cmd.do_help(self, line)
-
+        
 
 # def parse(line):
 #    """Helper method to parse user-typed input."""
