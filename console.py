@@ -85,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             key_id = "{}.{}".format(clargs[0], clargs[1])
             try:
-                print(models.models.storage.all()[key_id])
+                print(models.storage.all()[key_id])
             except KeyError:
                 print("** no instance found **")
 
