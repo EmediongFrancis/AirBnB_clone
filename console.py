@@ -48,38 +48,37 @@ class HBNBCommand(cmd.Cmd):
         """
             Creates a new instance of BaseModel, saves it
             to disk, and prints the id.
+            Usage: create <class name>
         """
         if not line:
             print("** class name missing **")
         else:
-            try:
+            if line in HBNBCommand.classes:
                 new_instance = eval(line)()
                 new_instance.save()
                 print(new_instance.id)
-            except:
+            else:
                 print("** class doesn't exist **")
 
     def do_show(self, line):
         """
             Prints the string representation of an instance
             based on the class name and id.
+            Usage: show <class name> <id>
         """
-        if len(line) == 0:
+        clargs = line.split()
+        if len(clargs) == 0:
             print("** class name missing **")
-            return
-        args = parse(line)
-        if args[0] not in HBNBCommand.classes:
+        elif clargs[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
-            return
-        try:
-            if args[1]:
-                name = "{}.{}".format(args[0], args[1])
-                if name not in storage.all().keys():
-                    print("** no instance found **")
-                else:
-                    print(storage.all()[name])
-        except IndexError:
+        elif len(clargs) == 1:
             print("** instance id missing **")
+        else:
+            key_id = "{}.{}".format(clargs[0], clargs[1])
+            try:
+                print(storage.all()[key_id])
+            except KeyError:
+                print("** no instance found **")
 
     def do_destroy(self, line):
         """
