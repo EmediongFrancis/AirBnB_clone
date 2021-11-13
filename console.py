@@ -7,6 +7,12 @@ from models.base_model import BaseModel
 from models import storage
 import cmd
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 
 class HBNBCommand(cmd.Cmd):
@@ -21,9 +27,16 @@ class HBNBCommand(cmd.Cmd):
     | Enter 'help' to see a list of commands.                |
     |                                                        |
     |+------------------------------------------------------+|
+    |                                                        |
+    |                                                        |
    '''
 
+<<<<<<< HEAD
     classes = {"BaseModel", "User"}
+=======
+    classes = {"BaseModel", "User", "State", "City", "Amenity", "Place",}
+    
+>>>>>>> 821ef407ffbcbf8e753df995a10538aa876ff28f
 
     def do_quit(self, line):
         """Quit command to exit the program."""
