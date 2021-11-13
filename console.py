@@ -8,6 +8,7 @@ from models import storage
 import cmd
 from models.user import User
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Command interpreter for the HBNB console.
@@ -23,7 +24,6 @@ class HBNBCommand(cmd.Cmd):
    '''
 
     classes = {"BaseModel", "User"}
-    
 
     def do_quit(self, line):
         """Quit command to exit the program."""
@@ -135,9 +135,11 @@ class HBNBCommand(cmd.Cmd):
             except:
                 print("** class doesn't exist **")
 
+
 def parse(line):
     """Helper method to parse user-typed input."""
     return tuple(line.split())
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

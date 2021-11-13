@@ -21,7 +21,6 @@ class FileStorage:
         if obj:
             obj_key = '{}.{}'.format(obj.__class__.__name__, obj.id)
             self.__objects[obj_key] = obj
-            
 
     def save(self):
         """save directories to json"""
