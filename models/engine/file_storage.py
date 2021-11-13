@@ -41,11 +41,10 @@ class FileStorage:
     def reload(self):
         """convert existing json  dicts to instances"""
         try:
-            with open(self.__file_path, 'r', encoding="utf-8") as f:
-                new_obj = json.load(f)
-            for key, val in new_obj.items():
-                class_name = val['__class__']
-                obj = eval(class_name + "(**val)")
-                self.__objects[key] = obj
+            if path.isfile(self.__file_path):
+                with open(self.__file_path, mode="r", encoding='UTF-8') as f:
+                   for key, value in json.load(f).items():
+                       value = eval(value['__class__'])(**value)
+                       self.__objects[key] = value
         except FileNotFoundError:
             pass
