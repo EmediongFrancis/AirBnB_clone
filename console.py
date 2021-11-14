@@ -41,7 +41,6 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """Exit with Ctrl-D."""
         return True
-        print("")
 
     def do_help(self, line):
         """
@@ -125,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
                 for key in models.storage.all().keys():
                     name = key.split(".")
                     if name[0] == clargs[0]:
-                        new_list.append(models.storage.all()[key])
+                        new_list.append(str(models.storage.all()[key]))
                     else:
                         continue
                 print(new_list)
