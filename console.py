@@ -113,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
         """
             Prints string representations of all instances
             based or not based on the class name.
-            Usage: all <class name>
+            Usage: all <class name> OR all
         """
         clargs = line.split()
         new_list = []
