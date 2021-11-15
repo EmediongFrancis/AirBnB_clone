@@ -11,6 +11,7 @@ from time import sleep
 from unittest.mock import patch
 from os import path, remove
 
+
 class Test_init(unittest.TestCase):
     """
         Class for testing __init__
@@ -86,9 +87,9 @@ class Test_init(unittest.TestCase):
             Test instantiation with kwargs.
         """
         key_id = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                    "created_at": "2021-11-13T01:16:36.442329",
-                    "updated_at": "2021-11-13T01:16:36.442382",
-                    "class_": "BaseModel"}
+                  "created_at": "2021-11-13T01:16:36.442329",
+                  "updated_at": "2021-11-13T01:16:36.442382",
+                  "class_": "BaseModel"}
         bm1 = BaseModel(**key_id)
         self.assertTrue(hasattr(bm1, "id"))
         self.assertTrue(hasattr(bm1, "created_at"))
@@ -97,9 +98,9 @@ class Test_init(unittest.TestCase):
         self.assertTrue(bm1.__class__ not in bm1.__dict__)
         self.assertEqual(bm1.id, key_id["id"])
         self.assertEqual(bm1.created_at.isoformat(),
-                            key_id["created_at"])
+                         key_id["created_at"])
         self.assertEqual(bm1.updated_at.isoformat(),
-                            key_id["updated_at"])
+                         key_id["updated_at"])
 
     def test_instantiation_without_kwargs_and_args(self):
         """
@@ -117,14 +118,14 @@ class Test_init(unittest.TestCase):
             Test date conversion to string.
         """
         key_id = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                    "created_at": "2021-11-13T01:16:36.442329",
-                    "updated_at": "2021-11-13T01:16:36.442382",
-                    "class_": "BaseModel"}
+                  "created_at": "2021-11-13T01:16:36.442329",
+                  "updated_at": "2021-11-13T01:16:36.442382",
+                  "class_": "BaseModel"}
         bm1 = BaseModel(**key_id)
         self.assertEqual(bm1.created_at.isoformat(),
-                            key_id["created_at"])
+                         key_id["created_at"])
         self.assertEqual(bm1.updated_at.isoformat(),
-                            key_id["updated_at"])
+                         key_id["updated_at"])
         self.assertEqual(type(bm1.created_at), datetime)
         self.assertEqual(type(bm1.updated_at), datetime)
 
@@ -134,10 +135,10 @@ class Test_init(unittest.TestCase):
             presence of args.
         """
         key_id = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                    "created_at": "2021-11-13T01:16:36.442329",
-                    "updated_at": "2021-11-13T01:16:36.442382",
-                    "class_": "BaseModel"}
-        bm1 = BaseModel(1, "Bendito", ["Francis"] **key_id)
+                  "created_at": "2021-11-13T01:16:36.442329",
+                  "updated_at": "2021-11-13T01:16:36.442382",
+                  "class_": "BaseModel"}
+        bm1 = BaseModel(1, "Bendito", ["Francis"], **key_id)
         self.assertTrue(hasattr(bm1, "id"))
         self.assertTrue(hasattr(bm1, "created_at"))
         self.assertTrue(hasattr(bm1, "updated_at"))
@@ -145,11 +146,10 @@ class Test_init(unittest.TestCase):
         self.assertTrue(bm1.__class__ not in bm1.__dict__)
         self.assertEqual(bm1.id, key_id["id"])
         self.assertEqual(bm1.created_at.isoformat(),
-                            key_id["created_at"])
+                         key_id["created_at"])
         self.assertEqual(bm1.updated_at.isoformat(),
-                            key_id["updated_at"])
-        
-    
+                         key_id["updated_at"])
+
     class Test_str__(unittest.TestCase):
         """
             Test __str__ method.
@@ -176,8 +176,8 @@ class Test_init(unittest.TestCase):
             bm = BaseModel()
             string = "[{:s}] ({:s}) {:s}\n"
             string = string.format(bm.__class__.__name__,
-                                    bm.id,
-                                    str(bm.__dict__))
+                                   bm.id,
+                                   str(bm.__dict__))
             with patch("sys.stdout", new=io.StringIO()) as f:
                 print(bm)
                 str_test = f.getvalue()
@@ -192,8 +192,8 @@ class Test_init(unittest.TestCase):
             bm.code = 6969
             string = "[{:s}] ({:s}) {:s}\n"
             string = string.format(bm.__class__.__name__,
-                                    bm.id,
-                                    str(bm.__dict__))
+                                   bm.id,
+                                   str(bm.__dict__))
             with patch("sys.stdout", new=io.StringIO()) as f:
                 print(bm)
                 str_test = f.getvalue()
@@ -208,8 +208,8 @@ class Test_init(unittest.TestCase):
             bm.code = 6969
             string = "[{:s}] ({:s}) {:s}\n"
             string = string.format(bm.__class__.__name__,
-                                    bm.id,
-                                    str(bm.__dict__))
+                                   bm.id,
+                                   str(bm.__dict__))
             with patch("sys.stdout", new=io.StringIO()) as f:
                 print(bm)
                 str_test = f.getvalue()
@@ -220,20 +220,19 @@ class Test_init(unittest.TestCase):
                 Test __str__ method with kwargs.
             """
             key_id = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                    "created_at": "2021-11-13T01:16:36.442329",
-                    "updated_at": "2021-11-13T01:16:36.442382",
-                    "class_": "BaseModel"}
+                      "created_at": "2021-11-13T01:16:36.442329",
+                      "updated_at": "2021-11-13T01:16:36.442382",
+                      "class_": "BaseModel"}
             bm = BaseModel(**key_id)
             string = "[{:s}] ({:s}) {:s}\n"
             string = string.format(bm.__class__.__name__,
-                                    bm.id,
-                                    str(bm.__dict__))
+                                   bm.id,
+                                   str(bm.__dict__))
             with patch("sys.stdout", new=io.StringIO()) as f:
                 print(bm)
                 str_test = f.getvalue()
                 self.assertEqual(str_test, string)
 
-    
     class Test_save(unittest.TestCase):
         """
             Test save method.
@@ -264,7 +263,7 @@ class Test_init(unittest.TestCase):
             bm.save()
             self.assertFalse(time_up == bm.updated_at)
             self.assertTrue(time_cr == bm.created_at)
-        
+
         def test_save_type(self):
             """
                 Test that save method type is of datetime.
@@ -335,4 +334,3 @@ class Test_init(unittest.TestCase):
             dict = bm.to_dict()
             self.assertEqual(dict["created_at"], time_cr.isoformat())
             self.assertEqual(dict["updated_at"], time_up.isoformat())
-            
