@@ -13,6 +13,7 @@ from os import path, remove
 from unittest.mock import patch
 from time import sleep
 
+
 class Test_user_instance(unittest.TestCase):
     """
         Test cases for the User class.
@@ -190,9 +191,9 @@ class Test_init_user(unittest.TestCase):
             is an instance of BaseModel.
         """
         dat = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                "created_at": "2021-11-13T01:16:36.442329",
-                "updated_at": "2021-11-13T01:16:36.442382",
-                "class_": "User"}
+               "created_at": "2021-11-13T01:16:36.442329",
+               "updated_at": "2021-11-13T01:16:36.442382",
+               "class_": "User"}
 
         user = User(**dat)
         self.assertTrue(hasattr(user, "id"))
@@ -221,9 +222,9 @@ class Test_init_user(unittest.TestCase):
             Checks proper datetime conversion.
         """
         dat = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                "created_at": "2021-11-13T01:16:36.442329",
-                "updated_at": "2021-11-13T01:16:36.442382",
-                "class_": "User"}
+               "created_at": "2021-11-13T01:16:36.442329",
+               "updated_at": "2021-11-13T01:16:36.442382",
+               "class_": "User"}
 
         user = User(**dat)
         self.assertEqual(user.created_at.isoformat(), dat["created_at"])
@@ -237,9 +238,9 @@ class Test_init_user(unittest.TestCase):
             is an instance of BaseModel.
         """
         dat = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                "created_at": "2021-11-13T01:16:36.442329",
-                "updated_at": "2021-11-13T01:16:36.442382",
-                "class_": "User"}
+               "created_at": "2021-11-13T01:16:36.442329",
+               "updated_at": "2021-11-13T01:16:36.442382",
+               "class_": "User"}
         user = User(1, "Hi", ["World"], **dat)
         self.assertTrue(hasattr(user, "id"))
         self.assertTrue(hasattr(user, "created_at"))
@@ -276,8 +277,8 @@ class Test_str(unittest.TestCase):
         user = User()
         string = "[{:s}] ({:s}) {:s}\n"
         string = string.format(user.__class__.__name__,
-                                 user.id,
-                                    str(user.__dict__))
+                               user.id,
+                               str(user.__dict__))
         with patch("sys.stdout", new=io.StringIO()) as fake_out:
             print(user)
             self.assertEqual(fake_out.getvalue(), string)
@@ -292,8 +293,8 @@ class Test_str(unittest.TestCase):
         user.code = 6969
         string = "[{:s}] ({:s}) {:s}\n"
         string = string.format(user.__class__.__name__,
-                                 user.id,
-                                    str(user.__dict__))
+                               user.id,
+                               str(user.__dict__))
         self.assertEqual(str(user), string)
         with patch("sys.stdout", new=io.StringIO()) as fake_out:
             print(user)
@@ -305,14 +306,14 @@ class Test_str(unittest.TestCase):
             returns the correct string.
         """
         dat = {"id": "43ff8bae-dbe6-4a99-bc27-6ffa7f26caef",
-                "created_at": "2021-11-13T01:16:36.442329",
-                "updated_at": "2021-11-13T01:16:36.442382",
-                "class_": "User"}
+               "created_at": "2021-11-13T01:16:36.442329",
+               "updated_at": "2021-11-13T01:16:36.442382",
+               "class_": "User"}
         user = User(**dat)
         string = "[{:s}] ({:s}) {:s}\n"
         string = string.format(user.__class__.__name__,
-                                 user.id,
-                                    str(user.__dict__))
+                               user.id,
+                               str(user.__dict__))
         with patch("sys.stdout", new=io.StringIO()) as fake_out:
             print(user)
             self.assertEqual(fake_out.getvalue(), string)
@@ -340,7 +341,7 @@ class Test_save(unittest.TestCase):
 
     def test_save(self):
         """
-            Test that the updated_at time is updated 
+            Test that the updated_at time is updated
             via save method.
         """
         user = User()
@@ -350,6 +351,7 @@ class Test_save(unittest.TestCase):
         user.save()
         self.assertFalse(time_up == user.updated_at)
         self.assertTrue(time_cr == user.created_at)
+
 
 class Test_to_dict(unittest.TestCase):
     """
@@ -416,4 +418,3 @@ class Test_to_dict(unittest.TestCase):
         dicts = user.to_dict()
         self.assertEqual(dicts["created_at"], time_cr.isoformat())
         self.assertEqual(dicts["updated_at"], time_up.isoformat())
-        
