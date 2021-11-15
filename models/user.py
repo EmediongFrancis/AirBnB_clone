@@ -4,6 +4,7 @@
 """
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """
         Representation of a User.
@@ -13,7 +14,6 @@ class User(BaseModel):
     password = ''
     first_name = ''
     last_name = ''
-
     # def __init__(self, *args, **kwargs):
     #         """
     #             Initializes a User instance.
