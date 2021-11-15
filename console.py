@@ -32,7 +32,8 @@ class HBNBCommand(cmd.Cmd):
 #    '''
 
     classes = {"BaseModel": BaseModel, "User": User, "State": State,
-    "City": City, "Amenity": Amenity, "Place": Place, "Review": Review}
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
 
     def do_quit(self, line):
         """Quit command to exit the program."""
@@ -137,7 +138,8 @@ class HBNBCommand(cmd.Cmd):
         """
             Updates an instance based on the class name and id
             by adding or updating attribute.
-            Usage: update <class name> <id> <attribute name> "<attribute value>"
+            Usage: update <class name> <id> <attribute name>
+            "<attribute value>"
         """
         clargs = shlex.split(line)
         models.storage.reload()
@@ -162,9 +164,7 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
             else:
                 setattr(nova_dict[key_id], clargs[2], clargs[3])
-                models.storage.save()   
-
-        
+                models.storage.save()
 
     def parse(line):
         """Helper method to parse user-typed input."""
