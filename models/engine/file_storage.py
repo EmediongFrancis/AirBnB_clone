@@ -13,6 +13,7 @@ from models.review import Review
 import os.path as path
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """serializing and deserializing instances
     to and from json files"""
@@ -43,8 +44,8 @@ class FileStorage:
         try:
             if path.isfile(self.__file_path):
                 with open(self.__file_path, mode="r", encoding='UTF-8') as f:
-                   for key, value in json.load(f).items():
-                       value = eval(value['__class__'])(**value)
-                       self.__objects[key] = value
+                    for key, value in json.load(f).items():
+                        value = eval(value['__class__'])(**value)
+                        self.__objects[key] = value
         except FileNotFoundError:
             pass
