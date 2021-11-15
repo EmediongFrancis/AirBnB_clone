@@ -19,6 +19,7 @@ from models.place import Place
 from models.review import Review
 from os import path, remove
 
+
 class Test_all(unittest.TestCase):
     """
         Tests the `all` command.
@@ -66,7 +67,7 @@ class Test_all(unittest.TestCase):
         name = bm.__class__.__name__ + "." + bm.id
         dict_ = {name: bm}
         self.assertEqual(models.storage.all(), dict)
-    
+
     def test_state(self):
         """
             Tests the `all` command with State.
@@ -237,7 +238,7 @@ class Test_new(unittest.TestCase):
         models.storage.new(bm)
         dicts = models.storage.all()
         self.assertEqual(bm, dicts[key])
-    
+
     def test_new_place(self):
         """
             Tests the `new` command with Place.
@@ -288,7 +289,7 @@ class Test_save(unittest.TestCase):
             remove("file.json")
         except:
             pass
-    
+
     def test_save_base(self):
         """
             Tests the `save` command with BaseModel.
@@ -322,7 +323,7 @@ class Test_save(unittest.TestCase):
             self.assertEqual(bm.__class__.__name__, object[key]["__class__"])
             self.assertEqual(bm1.id, object[key1]["id"])
             self.assertEqual(bm1.__class__.__name__, object[key1]["__class__"])
-        
+
     def test_save_user(self):
         """
             Tests the `save` command with User.
@@ -407,7 +408,7 @@ class Test_save(unittest.TestCase):
             object = json.load(f)
             self.assertEqual(bm.id, object[key]["id"])
             self.assertEqual(bm.__class__.__name__, object[key]["__class__"])
-    
+
     def test_save_review(self):
         """
             Tests the `save` command with Review.
@@ -511,11 +512,12 @@ class Test_save(unittest.TestCase):
             self.assertEqual(r.id, object[key6]["id"])
             self.assertEqual(r.__class__.__name__, object[key6]["__class__"])
 
+
 class Test_reload(unittest.TestCase):
     """
         Tests the `reload` command.
     """
-    
+
     def setUp(self):
         """
             Sets up the tests.
@@ -740,4 +742,3 @@ class Test_reload(unittest.TestCase):
             self.assertFalse(s == dicts[eval(key)])
             self.assertEqual(s.id, dicts[eval(key)].id)
             self.assertEqual(s.__class__, dicts[eval(key)].__class__)
-            
