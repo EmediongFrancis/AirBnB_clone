@@ -6,6 +6,8 @@ Now that you have a command interpreter for managing your AirBnB objects, it’s
 
 Before developing a big and complex web application, we will build the front end step-by-step.
 
+![Software Architecture](https://github.com/EmediongFrancis/AirBnB_clone/blob/master/pictures/airbnb2.png)
+
 The first step is to “design” / “sketch” / “prototype” each element:
 
     Create simple HTML static pages
