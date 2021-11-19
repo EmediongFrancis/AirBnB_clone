@@ -25,6 +25,24 @@ Do you remember the Shell? It’s exactly the same but limited to a specific use
 * Update attributes of an object
 * Destroy an object
 
+### Installation:
+```
+Step 1: Clone this repository.
+Step 2: Switch to the repo's directory.
+```
+### Usage:
+```
+┌──(emediongfrancis㉿benditos-pc)-[~/Documents/Software Engineering/Holberton School/AirBnB_clone]
+└─$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+
+(hbnb) 
+```
+
 ## Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
